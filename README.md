@@ -7,6 +7,8 @@ I'm using Claude Schwarz'
 [Twitter thread](https://twitter.com/Claude1079/status/1513541029399519234) as
 reference/inspiration.
 
+Claude Schwarz' Github repo is [here](https://github.com/captain-amygdala/huidu-hd-d16).
+
 ## References
 
 - <https://wiki.t-firefly.com/en/Core-PX30-JD4/getting_started.html>
