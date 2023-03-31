@@ -54,6 +54,7 @@ Claude Schwarz' Github repo is [here](https://github.com/captain-amygdala/huidu-
 ## Backing up the disk
 
 - SSHd is disabled by default, but telnet isn't
+  - `telnet 192.168.0.96`
 - We need to sync the RTC, so ensure the battery is in the board and the board has internet access
   before boot - the NTP server will sync automatically. If we don't do this, you'll get a looping
   prompt to change your password when SSHing in.
@@ -70,9 +71,81 @@ Claude Schwarz' Github repo is [here](https://github.com/captain-amygdala/huidu-
     ssh-keygen -b 521 -f /etc/ssh/ssh_host_ecdsa_key -t ecdsa -N ""
     ssh-keygen -b 4096 -f /etc/ssh/ssh_host_ed25519_key -t ed25519 -N ""
     ```
-  - Now run `/usr/bin/sshd`
+  - Now run `/usr/sbin/sshd`
 
 - Remote `dd` reference: <https://unix.stackexchange.com/a/132800/41760>
 - `ssh root@192.168.0.27 "dd if=/dev/mmcblk0 | gzip -1 -" | dd of=huidu-d15.gz`
 - Or to a flash drive locally: `dd if=/dev/mmcblk0 bs=64 | gzip -1 > /root/usb_dev/huidu-d15.gz`
   - Very slow, CPU bound by `gzip`.
+
+## U-Boot notes
+
+- Uses the `px30-evb` board which is nice
+- Seems to be running Android?
+
+  ```
+  => boot
+  ca head not found
+  ANDROID: reboot reason: "(none)"
+  Booting kernel at 0x00280000 with fdt at 1f00000...
+
+
+  ## Booting Android Image at 0x0027f800 ...
+  Kernel load addr 0x00280000 size 14641 KiB
+  ## Flattened Device Tree blob at 01f00000
+    Booting using the fdt blob at 0x1f00000
+    XIP Kernel Image ... OK
+    Loading Device Tree to 0000000001d4f000, end 0000000001d67ffe ... OK
+  Adding bank: 0x00200000 - 0x10000000 (size: 0x0fe00000)
+
+  Starting kernel ...
+  ```
+
+Normal startup output
+
+```
+U-Boot 2017.09-gcfe92bd-dirty (Jul 10 2019 - 14:28:45 +0800)
+
+Model: Rockchip PX30 EVB
+DRAM:  254 MiB
+Relocation Offset is: 0db75000
+Using default environment
+
+dwmmc@ff370000: 1, dwmmc@ff390000: 0
+Card did not respond to voltage select!
+mmc_init: -95, time 9
+switch to partitions #0, OK
+mmc0(part 0) is current device
+Bootdev: mmc 0
+PartType: EFI
+boot mode: None
+Load FDT from boot part
+DTB: rk-kernel.dtb
+I2c speed: 100000Hz
+PMIC:  RK8090 (on=0x69, off=0x00)
+vdd_logic 1100000 uV
+vdd_arm 1100000 uV
+DVFS: Get dvfs device failed, ret=-19
+Warn: can't find connect driver
+Failed to found available display route
+Warn: can't find connect driver
+Failed to found available display route
+In:    serial
+Out:   serial
+Err:   serial
+Model: Rockchip linux PX30 evb ddr3 board
+CLK:
+apll 600000 KHz
+dpll 664000 KHz
+cpll 24000 KHz
+npll 1188000 KHz
+gpll 1200000 KHz
+aclk_bus 200000 KHz
+hclk_bus 150000 KHz
+pclk_bus 100000 KHz
+aclk_peri 200000 KHz
+hclk_peri 150000 KHz
+pclk_pmu 100000 KHz
+DVFS: Get dvfs device failed, ret=-19
+Hit key to stop autoboot('CTRL+C'):  0
+```
