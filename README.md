@@ -154,3 +154,7 @@ Hit key to stop autoboot('CTRL+C'):  0
 
 - Porting to a new platform
   <https://elinux.org/images/2/2a/Schulz-how-to-support-new-board-u-boot-linux.pdf>
+- Bitbake docs are pretty good
+  <https://docs.yoctoproject.org/bitbake/bitbake-user-manual/bitbake-user-manual-intro.html#concepts>
+- This guide looks nice as well
+  <https://a4z.gitlab.io/docs/BitBake/guide.html#_adding_an_additional_layer>
