@@ -149,3 +149,8 @@ pclk_pmu 100000 KHz
 DVFS: Get dvfs device failed, ret=-19
 Hit key to stop autoboot('CTRL+C'):  0
 ```
+
+## Links and stuff
+
+- Porting to a new platform
+  <https://elinux.org/images/2/2a/Schulz-how-to-support-new-board-u-boot-linux.pdf>
