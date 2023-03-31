@@ -158,3 +158,22 @@ Hit key to stop autoboot('CTRL+C'):  0
   <https://docs.yoctoproject.org/bitbake/bitbake-user-manual/bitbake-user-manual-intro.html#concepts>
 - This guide looks nice as well
   <https://a4z.gitlab.io/docs/BitBake/guide.html#_adding_an_additional_layer>
+- Need to build ARM Trusted Firmware
+  <https://github.com/u-boot/u-boot/blob/master/doc/board/rockchip/rockchip.rst#tf-a>
+
+  - More here <https://opensource.rock-chips.com/wiki_ATF>
+
+  ```bash
+  apt install gcc-aarch64-linux-gnu swig
+
+  # ARM Trusted Firmware (ATF)
+  git clone --depth 1 https://github.com/ARM-software/arm-trusted-firmware.git
+  cd arm-trusted-firmware
+  make realclean
+  make CROSS_COMPILE=aarch64-linux-gnu- PLAT=px30
+
+  # Uboot
+  export BL31=../arm-trusted-firmware/build/px30/release/bl31/bl31.elf
+  make evb-px30_defconfig
+  make CROSS_COMPILE=aarch64-linux-gnu-
+  ```

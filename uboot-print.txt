@@ -47,3 +47,25 @@ stderr=serial,vidconsole
 stdout=serial,vidconsole
 usb_boot=usb start; if usb dev ${devnum}; then setenv devtype usb; run scan_dev_for_boot_part; fi
 vendor=rockchip
+
+=> version
+U-Boot 2017.09-gcfe92bd-dirty (Jul 10 2019 - 14:28:45 +0800)
+
+aarch64-linux-gnu-gcc (Linaro GCC 6.3-2017.05) 6.3.1 20170404
+GNU ld (Linaro_Binutils-2017.05) 2.27.0.20161019
+
+=> bdinfo
+arch_number = 0x00000000
+boot_params = 0x00000000
+DRAM bank   = 0x00000000
+-> start    = 0x00200000
+-> size     = 0x0FE00000
+baudrate    = 115200 bps
+TLB addr    = 0x0FFF0000
+relocaddr   = 0x0DD75000
+reloc off   = 0x0DB75000
+irq_sp      = 0x01D6A910
+sp start    = 0x01D6A910
+FB base     = 0x00000000
+Early malloc usage: 13a0 / 2000
+fdt_blob = 0000000001f00000
